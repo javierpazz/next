@@ -286,7 +286,7 @@ model OrderItem {
   image       String?
   price       Float
   size        String?
-  porIva      Int
+  porIva      Float
   venDat      DateTime?
   observ      String?
   terminado   Boolean?

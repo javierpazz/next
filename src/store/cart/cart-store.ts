@@ -34,16 +34,41 @@ export const useCartStore = create<State>()(
       getSummaryInformation: () => {
         const { cart } = get();
 
-        const subTotal = cart.reduce(
-          (subTotal, product) => product.quantity * product.price + subTotal,
-          0
-        );
-        const tax = subTotal * 0.15;
-        const total = subTotal + tax;
-        const itemsInCart = cart.reduce(
-          (total, item) => total + item.quantity,
-          0
-        );
+        // const subTotal = cart.reduce(
+        //   (subTotal, product) => product.quantity * product.price + subTotal,
+        //   0
+        // );
+        // const tax = subTotal * 0.15;
+        // const total = subTotal + tax;
+        // const itemsInCart = cart.reduce(
+        //   (total, item) => total + item.quantity,
+        //   0
+        // );
+
+////////paso de place order
+  const { subTotal, tax, total, itemsInCart } = cart.reduce(
+    (totals, item) => {
+      const productQuantity = item.quantity;
+
+      const subTotal = item.price * productQuantity;
+      const subTax = (item.porIva/100) * item.price * productQuantity ;
+      // const subTotal = 1 * productQuantity;
+      
+      // totals.subTotal += subTotal;
+      // totals.tax += subTotal * 0.15;
+      // totals.total += subTotal * 1.15;
+      totals.itemsInCart += item.quantity;
+      totals.subTotal += subTotal;
+      totals.tax += subTax;
+      totals.total += subTotal + subTax;
+
+      return totals;
+    },
+    { subTotal: 0, tax: 0, total: 0, itemsInCart:0 }
+  );
+////////paso de place order
+
+
 
         return {
           subTotal,

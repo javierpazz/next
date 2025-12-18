@@ -7,6 +7,7 @@ import type { Address, Size } from "@/interfaces";
 interface ProductToOrder {
   productId: string;
   quantity: number;
+  porIva: number;
   size: Size;
 }
 
@@ -46,12 +47,16 @@ export const placeOrder = async (
 
       if (!product) throw new Error(`${item.productId} no existe - 500`);
 
-      // const subTotal = product.price * productQuantity;
-      const subTotal = 1 * productQuantity;
+      const subTotal = product.price! * productQuantity;
+      const subTax = (product.porIva!/100) * product.price! * productQuantity ;
+      // const subTotal = 1 * productQuantity;
 
+      // totals.subTotal += subTotal;
+      // totals.tax += subTotal * 0.15;
+      // totals.total += subTotal * 1.15;
       totals.subTotal += subTotal;
-      totals.tax += subTotal * 0.15;
-      totals.total += subTotal * 1.15;
+      totals.tax += subTax;
+      totals.total += subTotal + subTax;
 
       return totals;
     },
@@ -88,8 +93,8 @@ export const placeOrder = async (
 
       // Verificar valores negativos en las existencia = no hay stock
       updatedProducts.forEach((product) => {
-        // if (product.inStock < 0) {
-        if (1 < 0) {
+        if (product.inStock! < 0) {
+        // if (1 < 0) {
           throw new Error(`${product.title} no tiene inventario suficiente`);
         }
       });
@@ -103,12 +108,17 @@ export const placeOrder = async (
           tax: tax,
           total: total,
 
+          isPaid: false,
+          salbuy: "SALE",
+          ordYes: "Y",
+          staOrd: "NUEVA",
+
           orderItems: {
             createMany: {
               data: productIds.map((p) => ({
                 title: "title",
                 medPro: "medPro",
-                porIva: 0.10,
+                porIva: p.porIva,
 
                 quantity: p.quantity,
                 size: p.size,

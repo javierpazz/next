@@ -72,7 +72,8 @@ export const ProductForm = ({ product, categories }: Props) => {
     formData.append("description", productToSave.description);
     formData.append("price", productToSave.price.toString());
     formData.append("inStock", productToSave.inStock.toString());
-    formData.append("sizes", productToSave.sizes.toString());
+    // formData.append("sizes", productToSave.sizes.toString());
+    formData.append("sizes", "M");
     formData.append("tags", productToSave.tags);
     formData.append("categoryId", productToSave.categoryId);
     formData.append("gender", productToSave.gender);
@@ -194,7 +195,7 @@ export const ProductForm = ({ product, categories }: Props) => {
 
         {/* As checkboxes */}
         <div className="flex flex-col">
-          <span>Tallas</span>
+          {/* <span>Tallas</span>
           <div className="flex flex-wrap">
             {sizes.map((size) => (
               // bg-blue-500 text-white <--- si está seleccionado
@@ -211,7 +212,7 @@ export const ProductForm = ({ product, categories }: Props) => {
                 <span>{size}</span>
               </div>
             ))}
-          </div>
+          </div> */}
 
           <div className="flex flex-col mb-2">
             <span>Fotos</span>

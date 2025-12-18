@@ -14,7 +14,8 @@ export const AddToCart = ({ product }: Props) => {
 
   const addProductToCart = useCartStore( state => state.addProductTocart );
 
-  const [size, setSize] = useState<Size | undefined>();
+  // const [size, setSize] = useState<Size | undefined>();
+  const [size, setSize] = useState<Size | undefined>("M");
   const [quantity, setQuantity] = useState<number>(1);
   const [posted, setPosted] = useState(false);
 
@@ -28,8 +29,10 @@ export const AddToCart = ({ product }: Props) => {
       slug: product.slug,
       title: product.title,
       price: product.price,
+      porIva: product.porIva,
       quantity: quantity,
-      size: size,
+      // size: size,
+      size: "M",
       image: product.images[0]
     }
 
@@ -51,11 +54,11 @@ export const AddToCart = ({ product }: Props) => {
       )}
 
       {/* Selector de Tallas */}
-      <SizeSelector
+      {/* <SizeSelector
         selectedSize={size}
         availableSizes={product.sizes}
         onSizeChanged={setSize}
-      />
+      /> */}
 
       {/* Selector de Cantidad */}
       <QuantitySelector quantity={quantity} onQuantityChanged={setQuantity} />

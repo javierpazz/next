@@ -4,6 +4,7 @@ export interface Product {
   images: string[];
   inStock: number;
   price: number;
+  porIva: number;
   sizes: Size[];
   slug: string;
   tags: string[];
@@ -17,6 +18,7 @@ export interface CartProduct {
   slug: string;
   title: string;
   price: number;
+  porIva: number;
   quantity: number;
   size: Size;
   image: string;

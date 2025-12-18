@@ -37,6 +37,7 @@ export const PlaceOrder = () => {
     const productsToOrder = cart.map( product => ({
       productId: product.id,
       quantity: product.quantity,
+      porIva: product.porIva,
       size: product.size,
     }))
 
@@ -93,7 +94,7 @@ export const PlaceOrder = () => {
         <span>Subtotal</span>
         <span className="text-right">{currencyFormat(subTotal)}</span>
 
-        <span>Impuestos (15%)</span>
+        <span>Impuestos </span>
         <span className="text-right">{currencyFormat(tax)}</span>
 
         <span className="mt-5 text-2xl">Total:</span>
