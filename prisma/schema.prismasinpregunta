@@ -216,7 +216,7 @@ model Product {
   codigoPro   String
   title       String
   medPro      String
-  slug        String?
+  slug        String
   image       String?
   images      String[]
   image1      String?
@@ -233,16 +233,16 @@ model Product {
 
   ecoActive   Boolean       @default(true)
   description String
-  price       Float?        @default(0)
-  priceBuy    Float?        @default(0)
-  inStock     Float?        @default(0)
-  minStock    Float?        @default(0)
-  porIva      Float?        @default(0)
-  rating      Float?        @default(0)
-  numReviews  Int?
+  price       Float        @default(0)
+  priceBuy    Float        @default(0)
+  inStock     Float        @default(0)
+  minStock    Float        @default(0)
+  porIva      Float        @default(0)
+  rating      Float        @default(0)
+  numReviews  Int
   tags        String[]
   type        ProductType?
-  gender      Gender?
+  gender      Gender
   // sizes       String[]
   sizes       Size[]   @default([])
   reviews     Review[]

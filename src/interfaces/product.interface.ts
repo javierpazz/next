@@ -1,10 +1,17 @@
 export interface Product {
   id: string;
+  codPro:    string;
+  codigoPro: string;
+  medPro:    string;
   description: string;
   images: string[];
   inStock: number;
   price: number;
   porIva: number;
+  priceBuy: number;
+  minStock: number;
+  rating: number;
+  numReviews: number;
   sizes: Size[];
   slug: string;
   tags: string[];

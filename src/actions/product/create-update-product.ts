@@ -61,7 +61,9 @@ export const createUpdateProduct = async( formData: FormData ) => {
         product = await prisma.product.update({
           where: { id },
           data: {
-            ...rest,
+            codPro: "todo",
+            codigoPro: "todo",
+            medPro: "todo",            ...rest,
             sizes: {
               set: rest.sizes as Size[],
             },
@@ -75,6 +77,10 @@ export const createUpdateProduct = async( formData: FormData ) => {
         // Crear
         product = await prisma.product.create({
           data: {
+            codPro: "todo",
+            codigoPro: "todo",
+            medPro: "todo",
+            numReviews:0,
             ...rest,
             sizes: {
               set: rest.sizes as Size[],

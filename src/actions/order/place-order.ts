@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma";
 
 import { auth } from "@/auth.config";
 import type { Address, Size } from "@/interfaces";
+import { getConfigs, getClients } from "../";
 
 interface ProductToOrder {
   productId: string;
@@ -17,6 +18,7 @@ export const placeOrder = async (
 ) => {
   const session = await auth();
   const userId = session?.user.id;
+  const userEmail = session?.user.email;
 
   // Verificar sesión de usuario
   if (!userId) {
@@ -98,11 +100,26 @@ export const placeOrder = async (
           throw new Error(`${product.title} no tiene inventario suficiente`);
         }
       });
+    // 0. Obtener Punto de Venta y Cliente
+        let pVenta = "";
+        const configs = await getConfigs();
+        if (configs) {
+        const conf = configs[0];
+        pVenta = conf._id;
+        }
+        let cliente = "";
+        const clientes = await getClients({userEmail});
+        if (clientes) {
+        const clien = clientes[0];
+        cliente = clien._id;
+        }
 
       // 2. Crear la orden - Encabezado - Detalles
       const order = await tx.order.create({
         data: {
           user: userId,
+          id_config: pVenta,
+          id_client: cliente,
           itemsInOrder: itemsInOrder,
           subTotal: subTotal,
           tax: tax,

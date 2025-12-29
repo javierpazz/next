@@ -21,6 +21,11 @@ interface FormInputs {
   description: string;
   price: number;
   inStock: number;
+  priceBuy: number;
+  minStock: number;
+  porIva: number;
+  rating: number;
+  numReviews: number;
   sizes: string[];
   tags: string;
   gender: "men" | "women" | "kid" | "unisex";
@@ -72,6 +77,11 @@ export const ProductForm = ({ product, categories }: Props) => {
     formData.append("description", productToSave.description);
     formData.append("price", productToSave.price.toString());
     formData.append("inStock", productToSave.inStock.toString());
+    formData.append("priceBuy", productToSave.priceBuy.toString());
+    formData.append("minStock", productToSave.minStock.toString());
+    formData.append("porIva", productToSave.porIva.toString());
+    formData.append("rating", productToSave.rating.toString());
+    formData.append("numReviews", productToSave.numReviews.toString());
     // formData.append("sizes", productToSave.sizes.toString());
     formData.append("sizes", "M");
     formData.append("tags", productToSave.tags);

@@ -72,6 +72,10 @@ export const authConfig: NextAuthConfig = {
           // Comparar las contraseñas
           if( !bcryptjs.compareSync( password, user.password ) ) return null;
 
+          // Comprobar si es cliente
+          if ( !user.isActive || user.role !== "client" ) return null;
+      
+
 
           // Regresar el usuario sin el password
           const { password: _, ...rest } = user;

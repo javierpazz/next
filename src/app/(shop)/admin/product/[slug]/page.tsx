@@ -2,6 +2,7 @@ import { getCategories, getProductBySlug } from '@/actions';
 import { Title } from '@/components';
 import { redirect } from 'next/navigation';
 import { ProductForm } from './ui/ProductForm';
+import { prismaProductToForm } from '@/mappers/prisma-product-to-form';
 
 interface Props {
   params: {
@@ -32,7 +33,12 @@ export default async function ProductPage({ params }: Props) {
     <>
       <Title title={ title } />
 
-      <ProductForm product={ product ?? {} } categories={ categories } />
+      {/* <ProductForm product={ product ?? {} } categories={ categories } /> */}
+      <ProductForm
+        product={product ? prismaProductToForm(product) : {}}
+        categories={categories}
+      />
+
     </>
   );
 }

@@ -2,6 +2,7 @@ export const revalidate = 60; // 60 segundos
 
 import { getPaginatedProductsWithImages } from '@/actions';
 import { Pagination, ProductGrid, Title } from '@/components';
+import { Product } from '@/interfaces';
 
 import { Gender } from '@prisma/client';
 import { redirect } from 'next/navigation';
@@ -56,7 +57,8 @@ export default async function GenderByPage({ params, searchParams }: Props) {
       />
 
       <ProductGrid 
-        products={ products }
+        // products={ products }
+        products={ products as Product[] }
       />
 
       <Pagination totalPages={ totalPages }  />

@@ -3,7 +3,8 @@ import Image from "next/image";
 
 import { getOrderById } from "@/actions/order/get-order-by-id";
 import { currencyFormat } from "@/utils";
-import { OrderStatus, PayPalButton, Title } from "@/components";
+// import { OrderStatus, PayPalButton, Title } from "@/components";
+import { OrderStatus, Title } from "@/components";
 
 interface Props {
   params: {
@@ -96,15 +97,15 @@ export default async function OrdersByIdPage({ params }: Props) {
 
               <span>Subtotal</span>
               <span className="text-right">
-                {currencyFormat(order!.subTotal)}
+                {currencyFormat(order!.subTotal ?? 0)}
               </span>
 
               <span>Impuestos</span>
-              <span className="text-right">{currencyFormat(order!.tax)}</span>
+              <span className="text-right">{currencyFormat(order!.tax ?? 0)}</span>
 
               <span className="mt-5 text-2xl">Total:</span>
               <span className="mt-5 text-2xl text-right">
-                {currencyFormat(order!.total)}
+                {currencyFormat(order!.total ?? 0)}
               </span>
             </div>
 
@@ -112,7 +113,8 @@ export default async function OrdersByIdPage({ params }: Props) {
               {order?.isPaid ? (
                 <OrderStatus isPaid={order?.isPaid ?? false} />
               ) : (
-                <PayPalButton amount={order!.total} orderId={order!.id} />
+                <OrderStatus isPaid={order?.isPaid ?? false} />
+                // <PayPalButton amount={order!.total} orderId={order!.id} />
               )}
             </div>
           </div>

@@ -22,6 +22,18 @@ export const getProductBySlug = async( slug: string ) => {
 
     return {
       ...product,
+      slug: product.slug ?? product.id,
+        price: product.price ?? 0,
+        porIva: product.porIva ?? 0,
+        inStock: product.inStock ?? 0,
+        priceBuy: product.priceBuy ?? 0,
+        minStock: product.minStock ?? 0,
+        rating: product.rating ?? 0,
+        numReviews: product.numReviews ?? 0,
+        codPro: product.codPro ?? "",
+        codigoPro: product.codigoPro ?? "",
+        medPro: product.medPro ?? "",
+        gender: product.gender ?? "unisex",
       images: product.ProductImage.map( image => image.url )
     };
 
