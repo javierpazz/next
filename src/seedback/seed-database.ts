@@ -25,7 +25,7 @@ async function main() {
   await prisma.category.deleteMany();
   
   await prisma.parte.deleteMany();
-  await prisma.instrumento.deleteMany();
+  // await prisma.instrumento.deleteMany();
   await prisma.customer.deleteMany();
   await prisma.encargado.deleteMany();
   await prisma.supplier.deleteMany();
@@ -46,14 +46,10 @@ async function main() {
     await prisma.comprobante.createMany({
       data: initialData.comprobantes.map((c, index) => ({
         ...c,
-        codConId: index < 6 ? CONFIG1 : CONFIG2
-        // codConId: CONFIG1 
+        codCon: index < 6 ? CONFIG1 : CONFIG2
       }))
     });    
     
-  await prisma.instrumento.createMany({
-    data: instrumentos
-  });
   await prisma.supplier.createMany({
     data: suppliers
   });
@@ -106,8 +102,7 @@ async function main() {
     const dbProduct = await prisma.product.create({
       data: {
         ...rest,
-        categoryId: categoriesMap[type],
-        id_config: CONFIG1 
+        categoryId: categoriesMap[type]
       }
     })
 
